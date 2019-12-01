@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Calcular Custo Unitario</title>
+
+    <style media="screen">
+        /* Formatação do texto do corpo do formulário*/
+        
+        body {
+            /*cor branca*/
+            color: #FFFFFF;
+        }
+        /* Formatação dos input type=number*/
+        
+        input[type=number],
+        select {
+            width: 100%;
+            padding: 10px 15px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #FFFFFF;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        /*Formatação do link que gera o resultado */
+        
+        a {
+            background-color: #FFFFFF;
+            color: black;
+            text-align: center;
+            font-weight: inherit;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Cria o formulário -->
+    <form action="index.html" method="get" id="CustoUnitario">
+        <!-- Cria input que recebe quantidade de unidades por caixa -->
+        <label for="RecebeQuantidadeDeUnidadesPorCaixa">Unidades por caixa: </label>
+        <!-- Declara tipo numero id="UnidadesPorCaixa" -->
+        <input type="number" name="UnidadesPorCaixa" id="UnidadesPorCaixa" value="0">
+
+        <!-- Cria input que recebe quantidade de caixas-->
+        <label for="RecebeQuantidadeDeCaixas">Quantidade de Caixas: </label>
+        <!-- Declara tipo numero id="QuantidadeDeCaixas"-->
+        <input type="number" name="QuantidadeDeCaixas" id="QuantidadeDeCaixas" value="0">
+
+        <!-- Recebe o valor total pago -->
+        <label for="ValorTotalPago">Total pago: </label>
+        <!-- Declara tipo numero id="TotalPago" -->
+        <input type="number" name="TotalPago" id="TotalPago" value="0">
+
+        <!-- Recebe a quantidade total de unidades -->
+        <label for="QuantidadeTotalDeUnidades">Total de Unidades: </label>
+        <!-- Declara tipo numero id="TotalDeUnidades -->
+        <input type="number" name="TotalDeUnidades" id="TotalDeUnidades" value="0">
+
+        <!--Retorna o resultado do Calculo de Valor unitario -->
+        <label for="resultado">Valor unitário: </label>
+        <input type="number" name="RetornaCustoUnitario" disabled="disabled" />
+
+        <!-- Cria o Botão com link para o Formulario -->
+        <p><a href="#" onclick="calcular();">Calcule!</a></p>
+
+
+    </form>
+
+    <!-- JavaScript-->
+    <script type="text/javascript">
+        // Cria a Função calcular //
+        function calcular() {
+            // Chama o formulario //
+            var formulario = document.getElementById("CustoUnitario");
+
+            // Declara @UnidadesPorCaixa do input @UnidadesPorCaixa do formulario
+            var UnidadesPorCaixa = formulario.UnidadesPorCaixa.value;
+
+            // Declara @QuantidadeDeCaixas do input @QuantidadeDeCaixas do formulario
+            var QuantidadeDeCaixas = formulario.QuantidadeDeCaixas.value;
+
+            //Declara @TotalDeUnidades do input @TotalDeUnidades do formulario
+            var TotalDeUnidades = formulario.TotalDeUnidades.value;
+
+            //If @TotalDeUnidades == 0 então recebe @UnidadesPorCaixa * @QuantidadeDeCaixas
+            if (TotalDeUnidades == 0) {
+
+                TotalDeUnidades = UnidadesPorCaixa * QuantidadeDeCaixas;
+            }
+
+            formulario.TotalDeUnidades.value = TotalDeUnidades;
+
+            var TotalPago = formulario.TotalPago.value;
+
+            /* variável @total recebe divisão de 
+            // @TotalPago dividido por @TotalDeUnidades*/
+            var total = TotalPago / TotalDeUnidades;
+
+            // Declara o input@RetornaCustoUnitario recebendo o valor de @total
+            // com 2 dígitos decimais -- .tofixed(2)
+            formulario.RetornaCustoUnitario.value = total.toFixed(2);
+        }
+    </script>
+
+</body>
